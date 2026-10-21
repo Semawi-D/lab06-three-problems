@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Formats.Asn1;
+using System.Numerics;
 using System.Xml.Serialization;
 double choice = 0;
 Random rng = new Random(4000);
@@ -25,7 +26,7 @@ while( choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5)
     }
 choice = Convert.ToInt32(choice);
 
-//Ex 1
+//Ex1
  if (choice == 1 || choice == 4)
 {
   Console.WriteLine("");
@@ -101,9 +102,37 @@ if (choice == 2 || choice == 4)
     } while(answer.Equals("y"));
     Console.WriteLine($"You rolled {i - 1} times and won {wins}.");
 }
+
+//Ex3
 if (choice == 3 || choice == 4)
 {
-    //3
+    int[] scores = new int[5];
+    Console.WriteLine("");
+for (int i = 0; i < 5; i++)
+        {
+            Console.Write($"Score {i + 1}: ");
+            scores[i] = Convert.ToInt32(Console.ReadLine() ?? "0");
+        }
+    int total = 0;
+    int highest = 0;
+    int passing = 0;
+foreach(int score in scores)
+        {
+            total += score;
+            highest = Math.Max(highest,score);
+            if (score >= 60)
+            {
+                ++passing;
+            }
+        }
+    double average = (double)total/scores.Length;
+    average = Math.Round(average,2);
+    Console.WriteLine("");
+    Console.WriteLine($"Scores entered: {scores.Length}");
+    Console.WriteLine($"Total: {total}");
+    Console.WriteLine($"Average: {average}");
+    Console.WriteLine($"Highest: {highest}");
+    Console.WriteLine($"Passing: {passing} of {scores.Length}");
 }
 } while (choice != 5);
 
