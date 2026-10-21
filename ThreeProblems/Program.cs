@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
+using System.Formats.Asn1;
 using System.Xml.Serialization;
 double choice = 0;
+Random rng = new Random(4000);
 
 //Menu
 do
@@ -63,10 +65,41 @@ choice = Convert.ToInt32(choice);
         } 
 }
 
-
+//Ex2
 if (choice == 2 || choice == 4)
 {
-    //2
+    string answer;
+    string message;
+    int i = 1;
+    int wins = 0;
+    do
+    { 
+      int value1 = rng.Next(1,7);
+      int value2 = rng.Next(1,7);
+      if (value1 == 1 && value2 == 1)
+            {
+                message = "Snake eyes.";
+            }
+      else if (value1 == value2 && value1 != 1 && value2 != 1)
+            {
+                message = "Doubles!";
+            }
+      else if(value1 + value2 == 7 || value1 + value2 == 11)
+            {
+                message = "A winner.";
+                ++wins;
+            }
+            else
+            {
+                message = "";
+            }
+      Console.WriteLine("");
+      Console.WriteLine($"Role {i}: {value1} and {value2}, total {value1 + value2}. {message}");
+      Console.Write("Roll again? (y/n): ");
+      answer = (Console.ReadLine() ?? "n").Trim().ToLower();
+      ++i;
+    } while(answer.Equals("y"));
+    Console.WriteLine($"You rolled {i - 1} times and won {wins}.");
 }
 if (choice == 3 || choice == 4)
 {
