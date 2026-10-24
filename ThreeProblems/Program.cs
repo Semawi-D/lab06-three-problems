@@ -10,8 +10,11 @@
 
 
 
+using System.Reflection.Metadata;
+
 double choice = 0;
-Random rng = new Random(4000);
+const int seed = 4000;
+Random rng = new Random(seed);
 
 // I used the do while loop because we need to run the menu once to know what the user wants/inputs, then we will keep the program running until the user wants to quit.
 do
@@ -104,7 +107,7 @@ if (choice == 2 || choice == 4)
             {
                 message = "";
             }
-      Console.WriteLine($"Role {i}: {value1} and {value2}, total {value1 + value2}. {message}");
+      Console.WriteLine($"Roll {i}: {value1} and {value2}, total {value1 + value2}. {message}");
       Console.Write("Roll again? (y/n): ");
       answer = (Console.ReadLine() ?? "n").Trim().ToLower();
       ++i;
@@ -138,7 +141,7 @@ foreach(int score in scores)
             }
         }
     double average = (double)total/scores.Length;
-    average = Math.Round(average,2);
+    average = Math.Round(average,1);
     Console.WriteLine("");
     Console.WriteLine($"Scores entered: {scores.Length}");
     Console.WriteLine($"Total: {total}");
